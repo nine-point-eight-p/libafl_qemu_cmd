@@ -21,14 +21,9 @@ pub fn libafl_qemu_call0(action: LibaflWord) -> LibaflWord {
 
     unsafe {
         asm!(
-            "mov rax, {1}",
-            "call {2}",
-            "mov {0}, rax",
-            lateout(reg) ret,
-            in(reg) action,
+            "call {0}",
             in(reg) backdoor,
-            // clobbered registers
-            out("rax") _,
+            inlateout("rax") action => ret,
         );
     }
 
@@ -40,17 +35,10 @@ pub fn libafl_qemu_call1(action: LibaflWord, arg1: LibaflWord) -> LibaflWord {
 
     unsafe {
         asm!(
-            "mov rax, {1}",
-            "mov rdi, {2}",
-            "call {3}",
-            "mov {0}, rax",
-            lateout(reg) ret,
-            in(reg) action,
-            in(reg) arg1,
+            "call {0}",
             in(reg) backdoor,
-            // clobbered registers
-            out("rax") _,
-            out("rdi") _,
+            inlateout("rax") action => ret,
+            in("rdi") arg1,
         );
     }
     
@@ -62,20 +50,11 @@ pub fn libafl_qemu_call2(action: LibaflWord, arg1: LibaflWord, arg2: LibaflWord)
 
     unsafe {
         asm!(
-            "mov rax, {1}",
-            "mov rdi, {2}",
-            "mov rsi, {3}",
-            "call {4}",
-            "mov {0}, rax",
-            lateout(reg) ret,
-            in(reg) action,
-            in(reg) arg1,
-            in(reg) arg2,
+            "call {0}",
             in(reg) backdoor,
-            // clobbered registers
-            out("rax") _,
-            out("rdi") _,
-            out("rsi") _,
+            inlateout("rax") action => ret,
+            in("rdi") arg1,
+            in("rsi") arg2,
         );
     }
 
