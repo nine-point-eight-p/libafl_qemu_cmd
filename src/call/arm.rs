@@ -1,6 +1,6 @@
 use std::arch::asm;
 
-pub type LibaflWord = u64;
+pub type LibaflWord = u32;
 
 #[naked]
 fn backdoor() {
