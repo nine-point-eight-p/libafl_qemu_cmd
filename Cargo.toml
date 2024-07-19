@@ -2,9 +2,3 @@
 name = "libafl_qemu_cmd"
 version = "0.1.0"
 edition = "2021"
-
-[features]
-# The following features are mutually exclusive
-# Check out 3.B section in LibAFL QEMU paper for more details: https://hal.science/hal-04500872/ 
-backdoor = []  # Use backdoor instruction
-sync_backdoor = [] # Use sync backdoor instruction

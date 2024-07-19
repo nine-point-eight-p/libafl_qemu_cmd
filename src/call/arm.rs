@@ -1,15 +1,26 @@
 use core::arch::asm;
 
+use crate::common::{BACKDOOR_OPCODE, SYNC_BACKDOOR_OPCODE};
+
 pub type LibaflWord = u32;
 
+pub fn backdoor_call() {
+    unsafe {
+        asm!(
+            ".word {opcode}",
+            opcode = const BACKDOOR_OPCODE,
+        );
+    }
+}
+
 #[inline(never)]
-pub fn libafl_qemu_call0(action: LibaflWord) -> LibaflWord {
+pub fn sync_backdoor_call0(action: LibaflWord) -> LibaflWord {
     let ret: LibaflWord;
 
     unsafe {
         asm!(
             ".word {opcode}",
-            opcode = const OPCODE,
+            opcode = const SYNC_BACKDOOR_OPCODE,
             inlateout("r0") action => ret,
         );
     }
@@ -18,13 +29,13 @@ pub fn libafl_qemu_call0(action: LibaflWord) -> LibaflWord {
 }
 
 #[inline(never)]
-pub fn libafl_qemu_call1(action: LibaflWord, arg1: LibaflWord) -> LibaflWord {
+pub fn sync_backdoor_call1(action: LibaflWord, arg1: LibaflWord) -> LibaflWord {
     let ret: LibaflWord;
 
     unsafe {
         asm!(
             ".word {opcode}",
-            opcode = const OPCODE,
+            opcode = const SYNC_BACKDOOR_OPCODE,
             inlateout("r0") action => ret,
             in("r1") arg1,
         );
@@ -34,13 +45,13 @@ pub fn libafl_qemu_call1(action: LibaflWord, arg1: LibaflWord) -> LibaflWord {
 }
 
 #[inline(never)]
-pub fn libafl_qemu_call2(action: LibaflWord, arg1: LibaflWord, arg2: LibaflWord) -> LibaflWord {
+pub fn sync_backdoor_call2(action: LibaflWord, arg1: LibaflWord, arg2: LibaflWord) -> LibaflWord {
     let ret: LibaflWord;
 
     unsafe {
         asm!(
             ".word {opcode}",
-            opcode = const OPCODE,
+            opcode = const SYNC_BACKDOOR_OPCODE,
             inlateout("r0") action => ret,
             in("r1") arg1,
             in("r2") arg2,

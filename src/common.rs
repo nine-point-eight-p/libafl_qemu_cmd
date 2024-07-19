@@ -3,14 +3,14 @@ compile_error!(
     "feature \"backdoor\" and feature \"sync_backdoor\" cannot be enabled at the same time"
 );
 
-#[cfg(all(feature = "backdoor", target_endian = "little"))]
-pub const OPCODE: u32 = 0x44f23a0f;
-#[cfg(all(feature = "backdoor", target_endian = "big"))]
-pub const OPCODE: u32 = 0x0f3af244;
-#[cfg(all(feature = "sync_backdoor", target_endian = "little"))]
-pub const OPCODE: u32 = 0x66f23a0f;
-#[cfg(all(feature = "sync_backdoor", target_endian = "big"))]
-pub const OPCODE: u32 = 0x0f3af266;
+#[cfg(target_endian = "little")]
+pub const BACKDOOR_OPCODE: u32 = 0x44f23a0f;
+#[cfg(target_endian = "big")]
+pub const BACKDOOR_OPCODE: u32 = 0x0f3af244;
+#[cfg(target_endian = "little")]
+pub const SYNC_BACKDOOR_OPCODE: u32 = 0x66f23a0f;
+#[cfg(target_endian = "big")]
+pub const SYNC_BACKDOOR_OPCODE: u32 = 0x0f3af266;
 
 pub enum Command {
     StartVirt = 0,

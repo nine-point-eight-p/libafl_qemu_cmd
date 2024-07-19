@@ -1,5 +1,4 @@
 #![feature(asm_const)]
-#![feature(naked_functions)]
 #![no_std]
 
 mod call;
