@@ -1,4 +1,4 @@
-use std::arch::asm;
+use core::arch::asm;
 
 pub type LibaflWord = u32;
 
