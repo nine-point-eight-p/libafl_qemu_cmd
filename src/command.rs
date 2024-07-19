@@ -52,6 +52,14 @@ pub fn load() -> LibaflWord {
     sync_backdoor_call0(Command::Load as LibaflWord)
 }
 
-pub fn version() -> LibaflWord {
-    sync_backdoor_call0(Command::Version as LibaflWord)
+pub fn version(version: u32) -> LibaflWord {
+    sync_backdoor_call1(Command::Version as LibaflWord, version as LibaflWord)
+}
+
+pub fn vaddr_filter_allow_range(start: *const u8, end: *const u8) -> LibaflWord {
+    sync_backdoor_call2(
+        Command::VaddrFilterAllow as LibaflWord,
+        start as LibaflWord,
+        end as LibaflWord,
+    )
 }
