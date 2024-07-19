@@ -1,8 +1,7 @@
 use core::arch::asm;
 
+use crate::call::LibaflWord;
 use crate::common::{BACKDOOR_OPCODE, SYNC_BACKDOOR_OPCODE};
-
-pub type LibaflWord = u32;
 
 pub fn backdoor_call() {
     unsafe {
