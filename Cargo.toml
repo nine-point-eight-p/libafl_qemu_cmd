@@ -2,3 +2,8 @@
 name = "libafl_qemu_cmd"
 version = "0.1.0"
 edition = "2021"
+
+[features]
+default = []
+# Use nightly and this feature with Rust version < 1.82.0
+nightly = []

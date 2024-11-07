@@ -1,5 +1,7 @@
 //! Harness APIs for LibAFL QEMU.
+#![cfg(feature = "nightly")]
 #![feature(asm_const)]
+
 #![no_std]
 #![deny(missing_docs)]
 #![deny(unused)]
